@@ -1,0 +1,15 @@
+{
+  "_review": "DRAFT: Nigerian Pidgin, written as a starting point only. MUST be reviewed and rewritten by native speakers before use.",
+  "consent_prompt": "How far! Before we start: your message na private. We dey remove name, phone number and address before we save anything, we no dey share your chat, and you fit type \"delete my data\" anytime. This assistant dey give information, e no dey diagnose. Licensed pharmacist go join when e need am. Reply \"I gree\" make we continue.",
+  "consent_thanks": "Thank you. Ask me anything about sexual and reproductive health. Your question go remain private.",
+  "consent_withdrawn": "E don do. We don stop to use your data and we don remove your saved messages. You fit come back anytime.",
+  "data_deleted": "We don delete your data. Nothing from this chat dey saved again.",
+  "emergency_care": "This one fit serious, you need care now now. Abeg go the nearest hospital or health centre, or call {emergency_number}. If you fit, make person follow you go. I dey connect you to pharmacist now.",
+  "crisis_support": "I happy say you tell me. You no dey alone for this. I dey connect you to person now. If you dey danger now, abeg call {crisis_line} or go the nearest hospital.",
+  "sexual_violence": "I sorry say this one happen to you. No be your fault. Some treatment, like medicine wey dey prevent HIV and emergency contraception, dey work best inside 72 hours, so abeg find help quick. I dey connect you to person wey fit help you for private. You fit also reach {gbv_referral}.",
+  "violence_support": "Thank you say you tell me. You deserve to dey safe. I dey connect you to person wey fit help you for private. If you dey danger now, call {emergency_number}. You fit also reach {gbv_referral}.",
+  "time_sensitive_pharmacist": "Time matter for this one, so I dey connect you to pharmacist now. Emergency contraception dey work best if you take am early.",
+  "pharmacist_handover": "Na licensed pharmacist suppose answer this one, so I dey connect you now. Your chat go remain private.",
+  "handover_pending": "Pharmacist go reply you soon. If e dey worse, abeg go the nearest hospital or call {emergency_number}.",
+  "minor_pathway": "Thank you say you share. I fit give you general health information, and I fit connect you to trained person wey you fit talk to for private. Product order na only for adults."
+}

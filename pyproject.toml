@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "srhr-safety-kit"
+version = "0.1.0"
+description = "Consent, privacy and escalation layer for sexual and reproductive health chatbots"
+readme = "README.md"
+license = {text = "MIT (code), CC BY 4.0 (rules and messages)"}
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.setuptools.packages.find]
+include = ["srhr_safety*"]
+
+[tool.setuptools.package-data]
+srhr_safety = ["rules/*.json", "messages/*.json"]

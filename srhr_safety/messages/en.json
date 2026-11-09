@@ -1,0 +1,15 @@
+{
+  "_review": "DRAFT: user-facing wording to be reviewed by a clinician and tested with users. Replace {placeholders} with your local referral contacts.",
+  "consent_prompt": "Hi! Before we chat: your messages are private. We remove names, phone numbers and addresses before anything is saved, we never share your chats, and you can type \"delete my data\" at any time. This assistant gives information, not a diagnosis. A licensed pharmacist steps in when needed. Reply \"I agree\" to continue.",
+  "consent_thanks": "Thank you. Ask me anything about sexual and reproductive health. Your questions stay private.",
+  "consent_withdrawn": "Done. We have stopped using your data and removed your saved messages. You can come back any time.",
+  "data_deleted": "Your data has been deleted. Nothing from this chat is saved anymore.",
+  "emergency_care": "This could be serious and needs care now. Please go to the nearest hospital or health centre, or call {emergency_number}. If you can, ask someone to go with you. I am also connecting you to a pharmacist right away.",
+  "crisis_support": "I'm really glad you told me. You don't have to go through this alone. I'm connecting you to a person now. If you are in danger right now, please call {crisis_line} or go to the nearest hospital.",
+  "sexual_violence": "I'm sorry this happened to you. It is not your fault. Some care, like medicine to prevent HIV and emergency contraception, works best within 72 hours, so please get help soon. I'm connecting you to someone who can help privately. You can also reach {gbv_referral}.",
+  "violence_support": "Thank you for telling me. You deserve to be safe. I'm connecting you to someone who can help privately. If you are in danger right now, call {emergency_number}. You can also reach {gbv_referral}.",
+  "time_sensitive_pharmacist": "This is time-sensitive, so I'm connecting you to a pharmacist now. Emergency contraception works best the sooner it is taken.",
+  "pharmacist_handover": "That's a question for a licensed pharmacist, so I'm connecting you to one now. Your chat stays private.",
+  "handover_pending": "A pharmacist will reply to you shortly. If things get worse, please go to the nearest hospital or call {emergency_number}.",
+  "minor_pathway": "Thanks for sharing. I can give you general health information, and I can connect you to a trained person you can talk to privately. Product orders are only for adults."
+}

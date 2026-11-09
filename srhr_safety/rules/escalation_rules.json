@@ -1,0 +1,130 @@
+{
+  "version": "0.1.0-draft",
+  "review": {
+    "status": "DRAFT: NOT CLINICALLY VALIDATED",
+    "note": "Example triggers written to show the format. Every rule must be reviewed and signed off by a licensed clinician or pharmacist before production use. Phrases in Nigerian Pidgin need native-speaker review.",
+    "reviewed_by": [],
+    "reviewed_at": null
+  },
+  "rules": [
+    {
+      "id": "EMERG_HEAVY_BLEEDING",
+      "category": "danger_sign",
+      "severity": "emergency",
+      "description": "Heavy vaginal bleeding, including during pregnancy or after birth",
+      "response": "emergency_care",
+      "review_status": "draft",
+      "match": {
+        "any_of": ["heavy bleeding", "bleeding heavily", "bleeding a lot", "bleeding won't stop",
+                   "bleeding will not stop", "soaking pads", "soaked my pad", "blood clots",
+                   "i dey bleed well well", "blood dey comot well well", "blood no gree stop"]
+      }
+    },
+    {
+      "id": "EMERG_PAIN_IN_PREGNANCY",
+      "category": "danger_sign",
+      "severity": "emergency",
+      "description": "Severe abdominal pain with pregnancy or a missed period (possible ectopic pregnancy)",
+      "response": "emergency_care",
+      "review_status": "draft",
+      "match": {
+        "all_of": [
+          ["severe pain", "sharp pain", "serious pain", "strong pain", "terrible pain",
+           "pain dey worry me well well", "belle dey pain me well well", "pain no gree stop"],
+          ["pregnant", "pregnancy", "missed period", "missed my period", "late period",
+           "my period late", "i get belle", "carry belle"]
+        ]
+      }
+    },
+    {
+      "id": "EMERG_COLLAPSE",
+      "category": "danger_sign",
+      "severity": "emergency",
+      "description": "Fainting, convulsions or loss of consciousness",
+      "response": "emergency_care",
+      "review_status": "draft",
+      "match": {
+        "any_of": ["fainted", "fainting", "passed out", "collapsed", "convulsion", "convulsing",
+                   "seizure", "unconscious", "she no dey wake", "i don faint"]
+      }
+    },
+    {
+      "id": "EMERG_SELF_HARM",
+      "category": "mental_health_crisis",
+      "severity": "emergency",
+      "description": "Thoughts of suicide or self-harm",
+      "response": "crisis_support",
+      "review_status": "draft",
+      "match": {
+        "any_of": ["kill myself", "end my life", "suicide", "suicidal", "want to die",
+                   "don't want to live", "dont want to live", "hurt myself", "harm myself",
+                   "i wan die", "i wan kill myself"]
+      }
+    },
+    {
+      "id": "SAFE_SEXUAL_VIOLENCE",
+      "category": "gender_based_violence",
+      "severity": "safeguarding",
+      "description": "Disclosure of rape or sexual assault (time-sensitive care: PEP, emergency contraception)",
+      "response": "sexual_violence",
+      "review_status": "draft",
+      "match": {
+        "any_of": ["raped", "rape", "sexual assault", "sexually assaulted", "forced me to have sex",
+                   "he forced me", "they forced me", "touched me without", "without my consent", "dem force me",
+                   "e force me", "him force me"]
+      }
+    },
+    {
+      "id": "SAFE_PARTNER_VIOLENCE",
+      "category": "gender_based_violence",
+      "severity": "safeguarding",
+      "description": "Disclosure of physical violence, threats or control by a partner or family member",
+      "response": "violence_support",
+      "review_status": "draft",
+      "match": {
+        "any_of": ["beats me", "beat me", "hits me", "he hit me", "slapped me", "threatens me",
+                   "threatened to kill", "afraid of my husband", "afraid of my boyfriend",
+                   "scared of my partner", "dey beat me", "e dey beat me", "him dey beat me"]
+      }
+    },
+    {
+      "id": "URG_EMERGENCY_CONTRACEPTION",
+      "category": "time_sensitive",
+      "severity": "urgent",
+      "description": "Recent unprotected sex or contraceptive failure: emergency contraception is time-sensitive",
+      "response": "time_sensitive_pharmacist",
+      "review_status": "draft",
+      "match": {
+        "any_of": ["unprotected sex", "condom burst", "condom broke", "condom tore",
+                   "condom tear", "condom came off", "no use condom", "we no use condom",
+                   "morning after pill", "emergency contraception", "postinor"]
+      }
+    },
+    {
+      "id": "PHARM_STI_SYMPTOMS",
+      "category": "symptoms",
+      "severity": "pharmacist",
+      "description": "Possible STI symptoms: needs a professional, the AI does not diagnose",
+      "response": "pharmacist_handover",
+      "review_status": "draft",
+      "match": {
+        "any_of": ["discharge", "smelly discharge", "sores", "sore down there", "burning when i pee",
+                   "burning when i urinate", "pain when i pee", "itching down there",
+                   "e dey scratch me for down", "e dey burn when i piss"]
+      }
+    },
+    {
+      "id": "PHARM_DIAGNOSE_OR_PRESCRIBE",
+      "category": "scope_boundary",
+      "severity": "pharmacist",
+      "description": "Requests for diagnosis, prescription or dosing: outside the AI's scope",
+      "response": "pharmacist_handover",
+      "review_status": "draft",
+      "match": {
+        "any_of": ["what do i have", "diagnose", "prescribe", "prescription", "which drug should i take",
+                   "how many tablets", "how many pills", "what dose", "dosage",
+                   "wetin i go take", "which drug i go take"]
+      }
+    }
+  ]
+}
