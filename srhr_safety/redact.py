@@ -22,8 +22,8 @@ _PATTERNS = [
 
 # Self-introductions in English and Pidgin: "my name is Ada", "na me be Chidi"
 _NAME_INTRO = re.compile(
-    r"\b((?i:my name is|my name na|i am called|call me|na me be|this is))\s+"
-    r"([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)")
+    r"\b((?i:my name is|my name na|i am called|call me|na me be|this is))\s+(?!(?i:on|at)\b)"
+    r"((?i:[a-z]+)(?:\s+[A-Z][a-z]+|\s+[a-z]+(?=\s*(?:[,.!?]|$)))?)")
 
 
 def redact(text: str) -> tuple[str, list[str]]:

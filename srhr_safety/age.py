@@ -32,7 +32,7 @@ def minor_signal(text: str) -> str | None:
     for pattern in _AGE_STATEMENTS:
         for m in pattern.finditer(norm):
             age = int(m.group(1))
-            if 9 <= age < ADULT_AGE:
+            if 0 <= age < ADULT_AGE:
                 return f"stated_age_{age}"
     for pattern in _SCHOOL_SIGNALS:
         if pattern.search(norm):
