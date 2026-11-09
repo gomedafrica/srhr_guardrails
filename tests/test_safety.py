@@ -1,6 +1,8 @@
 import json
 import tempfile
 import unittest
+from concurrent.futures import ThreadPoolExecutor
+from threading import Event
 from pathlib import Path
 
 from srhr_safety import (ALLOW, ASK_CONSENT, HANDOVER, MINOR_PATHWAY, REPLY_ONLY,
@@ -35,6 +37,10 @@ class TestRedaction(unittest.TestCase):
         self.assertNotIn("ada@mail.com", out)
         self.assertNotIn("Adeola", out)
         self.assertEqual(set(found), {"EMAIL", "ADDRESS", "NAME"})
+
+    def test_lowercase_name(self):
+        self.assertEqual(redact("my name is ada obi, please help")[0],
+                         "my name is [NAME], please help")
 
     def test_nin(self):
         out, _ = redact("my NIN is 12345678901")
@@ -117,6 +123,68 @@ class TestPipeline(unittest.TestCase):
         self.assertEqual(d.action, HANDOVER)
         self.assertIn("112", d.reply)
         self.assertIn("not_stored_no_consent", d.notes)
+        self.assertIsNone(store.get(_pid("u1")))
+
+    def test_emergency_with_data_rights_command(self):
+        for command in ["delete my data", "withdraw consent"]:
+            with self.subTest(command=command):
+                s = consented()
+                s.process("u1", "what is the implant?")
+                d = s.process("u1", f"I'm bleeding heavily, please {command}")
+                self.assertEqual(d.action, HANDOVER)
+                self.assertIn("112", d.reply)
+                self.assertIsNone(d.redacted_text)
+                rec = s.consent.store.get(_pid("u1"))
+                if command.startswith("delete"):
+                    self.assertIsNone(rec)
+                    self.assertIn("deleted", d.reply)
+                else:
+                    self.assertEqual(rec.consent, "withdrawn")
+                    self.assertEqual(rec.messages, [])
+                    self.assertIn("removed", d.reply)
+
+    def test_preconsent_handover_requires_resolution(self):
+        s = layer()
+        self.assertEqual(s.process("u1", "I'm bleeding heavily").action, HANDOVER)
+        self.assertEqual(s.process("u1", "yes").action, HANDOVER)
+        self.assertEqual(s.process("u1", "hello").action, HANDOVER)
+        self.assertIsNone(s.consent.store.get(_pid("u1")))
+        self.assertTrue(s.resolve_handover("u1", "pharmacist"))
+        self.assertEqual(s.process("u1", "hello").action, ASK_CONSENT)
+
+    def test_age_signal_before_consent_and_young_child(self):
+        s = layer()
+        self.assertEqual(s.process("u1", "I am 15").action, ASK_CONSENT)
+        self.assertIsNone(s.consent.store.get(_pid("u1")))
+        s.process("u1", "I agree")
+        self.assertEqual(s.process("u1", "hello").action, MINOR_PATHWAY)
+        s.process("u2", "I agree")
+        self.assertEqual(s.process("u2", "I am 8 years old").action, MINOR_PATHWAY)
+
+    def test_concurrent_delete_does_not_restore_record(self):
+        writing = Event()
+        release = Event()
+
+        class PausingStore(MemoryStore):
+            def put(self, rec):
+                if rec.messages:
+                    writing.set()
+                    if not release.wait(5):
+                        raise TimeoutError("Test did not release write")
+                super().put(rec)
+
+        store = PausingStore()
+        s = consented(store=store)
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            message = pool.submit(s.process, "u1", "what is the implant?")
+            try:
+                self.assertTrue(writing.wait(5))
+                deletion = pool.submit(s.process, "u1", "delete my data")
+                self.assertFalse(deletion.done())
+            finally:
+                release.set()
+            self.assertEqual(message.result().action, ALLOW)
+            self.assertEqual(deletion.result().action, REPLY_ONLY)
         self.assertIsNone(store.get(_pid("u1")))
 
     def test_pidgin_reply(self):

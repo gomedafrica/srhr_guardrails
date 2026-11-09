@@ -94,9 +94,10 @@ class ConsentManager:
         return bool(rec and rec.consent == "granted"
                     and rec.consent_version == self.policy_version)
 
-    def grant(self, pid: str) -> UserRecord:
+    def grant(self, pid: str, *, minor_flag: str | None = None) -> UserRecord:
         rec = self.record(pid)
         rec.consent, rec.consent_version, rec.consent_at = "granted", self.policy_version, _now()
+        rec.minor_flag = rec.minor_flag or minor_flag
         self.store.put(rec)
         return rec
 

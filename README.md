@@ -7,7 +7,7 @@ It sits between a messaging channel (Telegram, WhatsApp, SMS, web chat) and any 
 | Check | What it does |
 |---|---|
 | **Escalation rules** | Detects danger signs, gender-based violence disclosures, time-sensitive needs and out-of-scope requests (diagnosis, prescribing). It hands the conversation to a human. The AI cannot clear a handover; only a pharmacist, clinician or safeguarding officer can. |
-| **Consent** | Asks for plain-language consent before anything is stored. Emergencies still get an emergency reply without consent, but nothing about them is saved. |
+| **Consent** | Asks for plain-language consent before anything is stored. Emergencies still get an emergency reply without consent. Only a temporary handover flag is kept in memory. |
 | **Privacy filter** | Removes phone numbers, emails, ID numbers (NIN/BVN), street addresses and self-introduced names before storage. Platform user IDs are replaced by a keyed hash. |
 | **Data rights** | "delete my data", "withdraw consent" (and Pidgin equivalents) work at any point in the chat. |
 | **Under-18 pathway** | Age statements and school-level signals (JSS, SS2, WAEC...) switch to a protective pathway: no product sales, general information only, offer of a trained person. Only a human can clear it. |
@@ -23,7 +23,7 @@ Python 3.10+, no dependencies.
 
 ```bash
 git clone <repo-url> && cd srhr-safety-kit
-python -m unittest discover -s tests   # 23 tests
+python -m unittest discover -s tests
 python examples/cli_demo.py            # try it in a terminal
 ```
 
